@@ -2,24 +2,34 @@ package api
 
 import (
 	"database/sql"
+	"fmt"
+	"net/http"
 
+	"github.com/Barry-dE/REST-API-ECS/service/user"
 	"github.com/gorilla/mux"
 )
 
 type APIServer struct {
-	db *sql.DB
-	addr string
-
+	address string
+	database *sql.DB
 }
 
-func NewAPIServer(addr string, db sql.DB){
+// API server
+func NewAPIServer(address string, database *sql.DB) *APIServer {
+
 	return &APIServer{
-		addr: addr,
-		db: &db,
+		address: address,
+		database: database,
 	}
 }
 
-func (s*APIServer) Run() error {
-router := mux.NewRouter()
-subrouter:= router.PathPrefix("/api/v1").Subrouter()
+// API server method to start the server
+func (s *APIServer) Run() error {
+
+	router := mux.NewRouter()
+	subrouter := router.PathPrefix("/api/v1").Subrouter()
+	userHandler := user.NewHandler()
+	userHandler.RegisterRoutes(subrouter)
+	fmt.Println("Listening on", s.address)
+	return http.ListenAndServe(s.address, router)
 }
