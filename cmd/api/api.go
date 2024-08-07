@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Barry-dE/REST-API-ECS/service/user"
+	"github.com/Barry-dE/Novacart-api/services/user"
 	"github.com/gorilla/mux"
 )
 
@@ -23,13 +23,15 @@ func NewAPIServer(address string, database *sql.DB) *APIServer {
 	}
 }
 
-// API server method to start the server
+
 func (s *APIServer) Run() error {
 
 	router := mux.NewRouter()
 	subrouter := router.PathPrefix("/api/v1").Subrouter()
+	
 	userHandler := user.NewHandler()
 	userHandler.RegisterRoutes(subrouter)
+	
 	fmt.Println("Listening on", s.address)
 	return http.ListenAndServe(s.address, router)
 }
