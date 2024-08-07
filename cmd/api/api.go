@@ -2,7 +2,7 @@ package api
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/Barry-dE/Novacart-api/services/user"
@@ -32,6 +32,6 @@ func (s *APIServer) Run() error {
 	userHandler := user.NewHandler()
 	userHandler.RegisterRoutes(subrouter)
 	
-	fmt.Println("Listening on", s.address)
+	log.Println("Listening on", s.address)
 	return http.ListenAndServe(s.address, router)
 }
