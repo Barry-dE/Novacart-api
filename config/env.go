@@ -26,14 +26,14 @@ func initConfig() Configuration {
 	// Load environment variables from a .env file if it exists
 	godotenv.Load()
 
-	// Return a Configuration struct with values from environment variables or defaults
+	// Return a Configuration struct with values from environment variables or defaults if ".env" does not exist
 	return Configuration{
 		PublicHost: getEnvironment("PUBLIC_HOST", "http://localhost"),
 		Port:       getEnvironment("PORT", "8080"),
 		DBName:     getEnvironment("DB_NAME", "novacart"),
 		DBUser:     getEnvironment("DB_USER", "root"),
 		DBPassword: getEnvironment("DB_PASSWORD", "devopsoncloud"),
-		DBAdrress:  fmt.Sprintf("%s:%s", getEnvironment("DB_HOST", "127.0.0.1"), getEnvironment("DB_PORT", "3307")),
+		DBAdrress:  fmt.Sprintf("%s:%s", getEnvironment("DB_HOST", "127.0.0.1"), getEnvironment("DB_PORT", "3306")),
 	}
 }
 

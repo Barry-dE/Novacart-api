@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/Barry-dE/Novacart-api/cmd/api"
@@ -11,34 +12,37 @@ import (
 )
 
 func main() {
-	db, err :=  database.CreateNewMySQLStorage(mysql.Config{
-		User: config.Envs.DBUser,
-		Passwd: config.Envs.DBPassword,
-		Addr: config.Envs.DBAdrress,
-		DBName: config.Envs.DBName,
-		Net: "tcp",
-		AllowNativePasswords: true,
-		ParseTime: true,
-	}); 
-
-	if err !=nil {
-		panic(err)
-	}
-
-	server := api.NewAPIServer(":5173", db )
-	if err := server.Run(); err != nil{
+	//create new database instance
+	db, err := database.CreateNewMySQLStorage(mysql.Config{
+		User:                 config.Envs.DBUser,
+		Passwd:               config.Envs.DBPassword,
+		Addr:                 config.Envs.DBAdrress,
+		DBName:               config.Envs.DBName,
+		Net:                  "tcp",
+		AllowNativePasswords: false,
+		ParseTime:            true,
+	})
+	fmt.Println()
+	if err != nil {
 		panic(err)
 	}
 
 	initDatabase(db)
-	
+
+	//Create API server
+	server := api.NewAPIServer(":8080", db)
+	if err := server.Run(); err != nil {
+		panic(err)
+	}
 }
 
-func initDatabase(db *sql.DB){
-if err := db.Ping(); err != nil{
-	panic(err)
-}
+// connect to the database
+func initDatabase(db *sql.DB) {
+	err := db.Ping()
 
-log.Println("Connection to database was successful")
+	if err != nil {
+		log.Fatalf("Database connection failed: %v", err)
+	}
 
+	log.Println("Connection to database was successful")
 }
