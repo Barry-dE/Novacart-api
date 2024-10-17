@@ -1,11 +1,19 @@
-# REST API for NovaCart
+# NOVACART E-COMMERCE API
 
-## Description
+## Introduction:
 
-This is a REST API for NovaCart, an online store.
+This project is a production-ready E-commerce REST API built in Go, utilizing JWT authentication. It includes comprehensive testing of services and connects to a MySQL database. The API runs in a Docker container.
 
-## This readme would get updated as I build
+## Installation:
 
-##
+## Authentication:
 
-Create an HTTP server by creating some sort of handler
+## Endpoints: List of available endpoints with descriptions.
+
+## Request/Response Examples: Sample requests and responses for each endpoint.
+
+## Error Handling:
+
+## Versioning:
+
+## License:
