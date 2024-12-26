@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Barry-dE/Novacart-api/internal/store"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -15,6 +16,7 @@ type Config struct {
 
 type application struct {
 	config Config
+	store  store.Storage
 }
 
 func (app *application) mount() http.Handler {
