@@ -1,4 +1,4 @@
-This repository contains a Student CRUD REST API implemented in Golang using the Gin framework. The project serves as a learning exercise to explore best practices in building RESTful APIs, containerization, CI/CD pipelines, deployment, and observability. It is aimed at
+This repository contains a Student CRUD REST API implemented in Golang using the Gin framework. The project serves as a learning exercise to explore best practices in building RESTful APIs, containerization, CI/CD pipelines, deployment, and observability. It is aimed at 
 
 Features
 
